@@ -2,10 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import { vidRoutes } from './src/routes/vidRoutes';
 import { authRoutes } from './src/routes/authRoutes';
+import fileUpload from 'express-fileupload';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload())
 
 app.use('/videos',vidRoutes())
 app.use('/auth',authRoutes())

@@ -1,4 +1,4 @@
-import {db} from "../db/initdb";
+import db from "../db/initdb";
 import { Model, DataTypes, UUIDV4 } from "sequelize";
 import User from "./user";
 

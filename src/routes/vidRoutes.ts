@@ -1,14 +1,18 @@
 import express, { Router } from 'express';
-import { videoMetaHandler } from '../handlers/videoMetaHandler';
 import { videoUploadHandler } from '../handlers/videoUploadHandler';
-import { videoDownloadHandler } from '../handlers/videoDownloadHandler';
 import authMiddleware from '../middlewares/auth';
+import { videoMergeHandler } from '../handlers/videoMergeHandler';
+import { videoShareHandler } from '../handlers/videoShareHandler';
+import { videoTrimHandler } from '../handlers/videoTrimHandler';
 
 export function vidRoutes() : Router {
     const router = express.Router();
     router.use(authMiddleware)
+    
     router.post('/upload', videoUploadHandler)
-    router.post('/download', videoDownloadHandler)
+    router.post('/merge', videoMergeHandler)
+    router.post('/share', videoShareHandler)
+    router.post('/trim', videoTrimHandler)
 
     return router;
 }

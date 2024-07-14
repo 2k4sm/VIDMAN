@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
 import type { NextFunction, Request, Response } from 'express';
-import { context, type Data } from '../routes/vidRoutes';
 
 interface Decoded {
     id: string
@@ -21,10 +20,11 @@ const authMiddleware = async (req : Request, res : Response, next: NextFunction)
       if (!user) {
         return res.status(401).json({ error: 'Invalid token' });
       }
-      context.id = decoded.id;
+
+      (req as any).userId = decoded.id;
       next();
     } catch (error) {
-      res.status(401).json({ error: 'Invalid token' });
+      res.status(401).json({ error: error });
     }
 }
 

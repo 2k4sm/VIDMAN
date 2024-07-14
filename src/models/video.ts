@@ -26,13 +26,13 @@ Video.init({
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  duration: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  url: {
+  url : {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
+  },
+  videoId : {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
 }, {
   sequelize: db,

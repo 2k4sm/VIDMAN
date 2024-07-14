@@ -17,7 +17,8 @@ export async function uploadFile(supaClient : SupabaseClient, uploadFile : Uploa
         .from('videos')
         .upload(uploadFile.name,uploadFile.data, {
           cacheControl: '3600',
-          upsert: false
+          upsert: false,
+          contentType: uploadFile.mimetype
     })      
 
     return {

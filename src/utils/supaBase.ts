@@ -27,3 +27,44 @@ export async function uploadFile(supaClient : SupabaseClient, uploadFile : Uploa
     }
 }
 
+export async function downloadVideo(supaClient : SupabaseClient, filename : string){
+    
+    const { data, error } = await supaClient
+    .storage
+    .from('videos')
+    .download(filename)
+    
+    return {
+        data : data,
+        err : error
+    }
+    
+}
+
+export async function deleteVideo(supaClient : SupabaseClient, filename : string){
+
+    const { data, error } = await supaClient
+    .storage
+    .from('videos')
+    .remove([`videos/${filename}`])
+
+    return {
+        data : data,
+        err : error
+    }
+}
+
+export async function getVideoUrl(supaClient : SupabaseClient, filename : string, time : number){
+
+    const { data, error } = await supaClient
+    .storage
+    .from('videos')
+    .createSignedUrl(`videos/${filename}`, time, {
+        download: true
+    })
+
+    return {
+        data : data,
+        err : error
+    }
+}

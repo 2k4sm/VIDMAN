@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import type { UploadedFile } from "express-fileupload";
 import { createSupabaseClient, uploadFile } from "../utils/supaBase";
 import Video from "../models/video";
+import { createVideo } from "../db/videoDbOps";
 export const videoUploadHandler = async(req : Request , res : Response) => {
     const client = createSupabaseClient();
 
@@ -26,12 +27,12 @@ export const videoUploadHandler = async(req : Request , res : Response) => {
                 res.status(400).send({ error: uploadResult.err});
             }
 
-            const videoUpload = await Video.create({
-                userId : (req as any).userId,
-                filename : fileToUpload.name,
-                size : fileToUpload.size,
-                videoId : uploadResult.data?.id,
-            }) 
+            const videoUpload = await createVideo(
+                (req as any).userId,
+                fileToUpload.name,
+                fileToUpload.size,
+                uploadResult.data?.id as string
+            ) 
             
             console.log("video upload:",videoUpload);
             

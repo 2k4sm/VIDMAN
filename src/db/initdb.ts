@@ -5,7 +5,7 @@ console.log('Database connected.');
 
 
 (async () => {
-    await db.sync({ force: true });
+    await db.sync({ alter : true });
     console.log('All models were synchronized successfully.');
  })();
 

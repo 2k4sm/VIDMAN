@@ -14,7 +14,6 @@ const authMiddleware = async (req : Request, res : Response, next: NextFunction)
 
     try {
       const decoded = jwt.verify(token, process.env.JAAT_KEY!) as Decoded;
-      console.log("decoded:",decoded.id);
       const user = await User.findOne({ where: { id: decoded.id } });
 
       if (!user) {

@@ -35,7 +35,6 @@ app.get('/download/:filename', (req, res) => {
 
 
 app.get('/', (req, res) => {
-    console.log(req.hostname,req.protocol)
     res.send({ time : new Date() ,health : "server healthy" });
 })
 

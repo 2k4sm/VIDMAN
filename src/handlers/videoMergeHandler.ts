@@ -11,15 +11,13 @@ export const videoMergeHandler = async(req : Request, res : Response) => {
             const { data } = await ffmpegConcat(vidIds, vidIds.join('_') + '.mp4');
 
 
-            console.log(data);
-
+            console.log('Video merging completed:', data);
             const outputFilePath = vidIds.join('_') + '.mp4';
             const filePath = path.basename(outputFilePath);
             const fileUrl = `${req.protocol}://${process.env.DEPLOYED_INSTANCE}/download/${filePath}`;
             return res.json({ downloadUrl: fileUrl });
         } catch (error) {
-            console.error('Error during video merging:', error);
-            return res.status(500).json({ error: 'Internal Server Error' });
+            return res.status(500).json({ error: error });
         }
     }
 }

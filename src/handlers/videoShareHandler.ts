@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
 import { createSupabaseClient, getVideoUrl } from "../utils/supaBase";
 import { getVideoByVideoId } from "../db/videoDbOps";
-import { sign } from "jsonwebtoken";
 export const videoShareHandler = async(req : Request, res : Response) => {
     const { videoId, expiresIn } = req.body;
 

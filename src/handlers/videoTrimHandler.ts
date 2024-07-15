@@ -16,7 +16,7 @@ export const videoTrimHandler = async (req: Request, res: Response) => {
 
         const outputFilePath = videoId + '.mp4';
         const filePath = path.basename(outputFilePath);
-        const fileUrl = `${req.protocol}://${req.hostname}:${process.env.PORT!}/download/${filePath}`;
+        const fileUrl = `${req.protocol}://${process.env.DEPLOYED_INSTANCE}/download/${filePath}`;
         return res.json({ downloadUrl: fileUrl });
     } catch (error) {
         console.error('Error during video trimming:', error);

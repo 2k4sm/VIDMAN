@@ -1,10 +1,11 @@
-import ffmpeg from "fluent-ffmpeg";
 import { promises as fsPromises } from 'fs';
 import { join } from 'path';
 import { createSupabaseClient, downloadVideo } from "./supaBase";
 import { getVideoByVideoId } from "../db/videoDbOps";
+
 import ffmpegp from "@ffmpeg-installer/ffmpeg";
 import ffprobep from "@ffprobe-installer/ffprobe";
+import ffmpeg from "fluent-ffmpeg";
 
 const ffmpegPath = ffmpegp.path;
 const ffprobePath = ffprobep.path;
@@ -77,7 +78,7 @@ export async function ffmpegConcat(vidIds: string[], output: string) {
 
     try {
         await mergeVideos(videos, outputFilePath);
-        await deleteTempFiles(videos);
+        await deleteTempFiles(['./tmp']);
         return { data: outputFilePath, err: null };
     } catch (error) {
         return { data: null, err: error };

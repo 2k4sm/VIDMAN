@@ -40,12 +40,12 @@ export async function downloadVideo(supaClient: SupabaseClient, fileName: string
 }
 
 
-export async function deleteVideo(supaClient : SupabaseClient, filename : string){
+export async function deleteVideo(supaClient : SupabaseClient, filename : string[]){
 
     const { data, error } = await supaClient
     .storage
     .from('videos')
-    .remove([filename])
+    .remove([...filename])
 
     return {
         data : data,

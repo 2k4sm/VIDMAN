@@ -25,6 +25,7 @@
     "@types/fluent-ffmpeg": "^2.1.24",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mapbox": "^1.6.45",
+    "@types/moment": "^2.13.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.19.2",
@@ -33,6 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "mapbox": "^1.0.0-beta10",
     "mkdirp": "^3.0.1",
+    "moment": "^2.30.1",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
   }

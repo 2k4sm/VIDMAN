@@ -23,7 +23,11 @@ export const videoUploadHandler = async (req: Request, res: Response) => {
 
             const existingVideo = await Video.findOne({ where: { filename: file.name.toString() } });
             if (existingVideo) {
-                result.push({ data: existingVideo.dataValues });
+                result.push({ data:{
+                    filename : existingVideo.dataValues.filename, 
+                    videoId : existingVideo.dataValues.videoId,
+                    size : existingVideo.dataValues.size
+                } });
                 continue;
             }
 
@@ -47,7 +51,13 @@ export const videoUploadHandler = async (req: Request, res: Response) => {
                     data[0].id as string
                 );
 
-                result.push({ data: videoUpload.dataValues });
+                result.push({ 
+                    data:{
+                        filename : videoUpload.dataValues.filename, 
+                        videoId : videoUpload.dataValues.videoId,
+                        size : videoUpload.dataValues.size
+                    } 
+                });
             } else {
                 const uploadResult = await uploadFile(client, file);
                 if (uploadResult.err) {
@@ -61,7 +71,13 @@ export const videoUploadHandler = async (req: Request, res: Response) => {
                     uploadResult.data?.id as string
                 );
 
-                result.push({ data: videoUpload.dataValues });
+                result.push({ 
+                    data:{
+                        filename : videoUpload.dataValues.filename, 
+                        videoId : videoUpload.dataValues.videoId,
+                        size : videoUpload.dataValues.size
+                    } 
+                 });
             }
         }
 

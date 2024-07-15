@@ -58,9 +58,7 @@ export async function getVideoUrl(supaClient : SupabaseClient, filename : string
     const { data, error } = await supaClient
     .storage
     .from('videos')
-    .createSignedUrl(filename, time, {
-        download: true
-    })
+    .createSignedUrl(filename, time)
 
     return {
         data : data,

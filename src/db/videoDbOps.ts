@@ -23,9 +23,12 @@ export const getVideosByUserId = async (userId: string) => {
 export const getVideoByVideoId = async (videoId: string) => {
   try {
     const video = await Video.findOne({ where: { videoId } });
-    return video;
+    return {video : video,err : null};
   } catch (error) {
-    throw new Error('Error fetching video: ' + error);
+    return { 
+      video : null, 
+      err : new Error('Error fetching video: ' + error)
+    };
   }
 };
 

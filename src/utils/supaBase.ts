@@ -1,7 +1,8 @@
 
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import type{ UploadedFile } from 'express-fileupload';
-
+import { join } from 'path';
+import { promises as fsPromises } from 'fs';
 export function createSupabaseClient(){
     const client = createClient(
         process.env.SUPABASE_URL!,
@@ -27,26 +28,24 @@ export async function uploadFile(supaClient : SupabaseClient, uploadFile : Uploa
     }
 }
 
-export async function downloadVideo(supaClient : SupabaseClient, filename : string){
-    
-    const { data, error } = await supaClient
-    .storage
-    .from('videos')
-    .download(filename)
-    
-    return {
-        data : data,
-        err : error
+export async function downloadVideo(supaClient: SupabaseClient, fileName: string, outputPath: string) {
+    const { data, error } = await supaClient.storage.from('videos').download(fileName);
+    if (error) {
+        return { data: null, err: error };
     }
-    
+
+    const filePath = join(outputPath, fileName);
+    await fsPromises.writeFile(filePath, Buffer.from(await data.arrayBuffer()));
+    return { data: filePath, err: null };
 }
+
 
 export async function deleteVideo(supaClient : SupabaseClient, filename : string){
 
     const { data, error } = await supaClient
     .storage
     .from('videos')
-    .remove([`videos/${filename}`])
+    .remove([filename])
 
     return {
         data : data,
@@ -59,7 +58,7 @@ export async function getVideoUrl(supaClient : SupabaseClient, filename : string
     const { data, error } = await supaClient
     .storage
     .from('videos')
-    .createSignedUrl(`videos/${filename}`, time, {
+    .createSignedUrl(filename, time, {
         download: true
     })
 

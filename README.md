@@ -1,5 +1,59 @@
 # VIDMAN
 
+# Getting Started
+
+Clone the repository:
+
+```bash
+git clone git@github.com:2k4sm/VIDMAN.git
+```
+
+# Getting Started with the Backend.
+
+To get started follow these steps:
+
+INSTALL BUN
+```
+curl -fsSL https://bun.sh/install | bash
+```
+
+1. Navigate to the project directory:
+
+   ```bash
+   cd ./VIDMAN
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+   or
+
+   ```bash
+   bun install
+   ```
+
+3. Set up the environment variables:
+
+   - Create a `.env` file in the root directory.
+   - Add the following variables to the `.env` file:
+     ```bash
+     SUPABASE_URL=<supabase-url>
+     SUPABASE_ANON_KEY=<anon-key>
+     ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   or
+   ```bash
+   bun run dev
+   ```
+
+
 # Technical Requirement Documentation.
 
 ## Overview

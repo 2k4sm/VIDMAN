@@ -44,6 +44,7 @@ curl -fsSL https://bun.sh/install | bash
      SUPABASE_ANON_KEY=<anon-key>
      JAAT_KEY=<jwt-secret-key>
      DEPLOYED_INSTANCE=<hostname + port or deployed instance base url>
+     PORT=<server-port to run on.>
      ```
 
 4. Start the development server:
